@@ -1,0 +1,59 @@
+const express = require("express");
+const app = express();
+
+function validarNumeros(num1, num2) {
+  return !(isNaN(num1) || isNaN(num2));
+}
+
+app.get("/adicao/:num1/:num2", (req, res) => {
+  const num1 = Number(req.params.num1);
+  const num2 = Number(req.params.num2);
+
+  if (!validarNumeros(num1, num2)) {
+    return res.status(400).send("Erro: os parâmetros devem ser números!");
+  }
+
+  res.send(`Resultado da adição: ${num1 + num2}`);
+});
+
+app.get("/subtracao/:num1/:num2", (req, res) => {
+  const num1 = Number(req.params.num1);
+  const num2 = Number(req.params.num2);
+
+  if (!validarNumeros(num1, num2)) {
+    return res.status(400).send("Erro: os parâmetros devem ser números!");
+  }
+
+  res.send(`Resultado da subtração: ${num1 - num2}`);
+});
+
+app.get("/multiplicacao/:num1/:num2", (req, res) => {
+  const num1 = Number(req.params.num1);
+  const num2 = Number(req.params.num2);
+
+  if (!validarNumeros(num1, num2)) {
+    return res.status(400).send("Erro: os parâmetros devem ser números!");
+  }
+
+  res.send(`Resultado da multiplicação: ${num1 * num2}`);
+});
+
+app.get("/divisao/:num1/:num2", (req, res) => {
+  const num1 = Number(req.params.num1);
+  const num2 = Number(req.params.num2);
+
+  if (!validarNumeros(num1, num2)) {
+    return res.status(400).send("Erro: os parâmetros devem ser números!");
+  }
+
+  if (num2 === 0) {
+    return res.status(400).send("Erro: divisão por zero não é permitida!");
+  }
+
+  res.send(`Resultado da divisão: ${num1 / num2}`);
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando em http://localhost:3000");
+});
+
